@@ -1,13 +1,15 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
-
 using namespace std;
 
-// TODO: Define Point struct if not given
-// struct Point {
-// };
+// Struct for a point
+struct Point {
+    double x;
+    double y;
+};
 
+// Required output function
 void print_point_rotation(double x_before, double y_before,
                           double theta, double x_after, double y_after) {
     cout << "Before rotation: (x=" << x_before << ", y=" << y_before << ")\n";
@@ -27,17 +29,17 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // TODO: Declare point, pivot, and angle variables
+    // Read input values
+    Point p;
+    double theta;
+    input >> p.x >> p.y >> theta;
 
+    // Compute rotated coordinates
+    double x_after = p.x * cos(theta) - p.y * sin(theta);
+    double y_after = p.x * sin(theta) + p.y * cos(theta);
 
-    // TODO: Read input from file: x, y, theta, px, py
-
-
-    // TODO: Compute rotated coordinates around pivot
-
-
-    // TODO: Print rotated point
-
+    // Print results
+    print_point_rotation(p.x, p.y, theta, x_after, y_after);
 
     return 0;
 }

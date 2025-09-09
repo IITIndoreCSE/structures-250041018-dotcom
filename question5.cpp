@@ -1,19 +1,20 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
-
 using namespace std;
 
-// TODO: Define Sensor struct
-// struct Sensor {
-// };
+// Struct definition
+struct Sensor {
+    int id;
+    double temperature;
+    double voltage;
+};
 
-void print_sensor(int index, int id, double temperature, double voltage, const char* status) {
+// Required output function
+void print_sensor(int index, int id, double temperature, double voltage) {
     cout << "Sensor[" << index << "]: "
          << "id=" << id << ", "
          << "temperature=" << temperature << ", "
-         << "voltage=" << voltage << ", "
-         << "status=" << status << "\n";
+         << "voltage=" << voltage << "\n";
 }
 
 int main(int argc, char* argv[]) {
@@ -30,17 +31,22 @@ int main(int argc, char* argv[]) {
 
     int num_sensors;
     input >> num_sensors;
+    if (num_sensors > 10) num_sensors = 10; // limit for safety
 
-    const int MAX_SENSORS = 10;
+    Sensor sensors[10];
 
-    // TODO: Create an array of Sensor
-    // Sensor sensors[MAX_SENSORS];
+    // Read sensors
+    for (int i = 0; i < num_sensors; i++) {
+        input >> sensors[i].id
+              >> sensors[i].temperature
+              >> sensors[i].voltage;
+    }
 
-    // TODO: Read sensor data from input
-    // for (int i = 0; i < num_sensors; i++) {
-    // }
-
-    // TODO: Iterate using a pointer and print sensor data
+    // Use a pointer to iterate instead of indexing
+    Sensor* ptr = sensors;
+    for (int i = 0; i < num_sensors; i++, ptr++) {
+        print_sensor(i, ptr->id, ptr->temperature, ptr->voltage);
+    }
 
     return 0;
 }
